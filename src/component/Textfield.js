@@ -6,13 +6,12 @@ class Textfield extends Component {
     // }
 
     render() {
+        // console.log("move--> ", this.props.value)
         const unitType = this.props.value.map((value, index) => {
             return (
                 <option key={index}>{value}</option>
             )
         })
-        // console.log("in props--->",this.props.value)
-        // console.log("in unitgroup-->", unitGroupContents);
         return (
             <div>
                 <form>
@@ -24,19 +23,9 @@ class Textfield extends Component {
                     <div>
 
                         <select className="selectors2">
-                        {/* <option> select unit</option> */}
-                            {/* <option value={10}>Meter</option>
-                            <option value={20}>Kilometer</option>
-                            <option value={30}>Centimeter</option>
-                            <option value={20}>Milimeter</option> */}
                             {unitType}
                         </select>
                         <select className="selectors3">
-                        {/* <option> select unit</option> */}
-                            {/* <option value={10}>Meter</option>
-                            <option value={20}>Kilometer</option>
-                            <option value={30}>Centimeter</option>
-                            <option value={20}>Milimeter</option> */}
                             {unitType}
                         </select>
 

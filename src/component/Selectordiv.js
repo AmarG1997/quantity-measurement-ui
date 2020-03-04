@@ -2,17 +2,31 @@ import React, { Component } from 'react'
 import Textfield from './Textfield'
 
 const unitGroup = [{
-  "length": ["meter", "centimeter", "kilometer"], "mass": ["kg", "gram"],
-  "Temperature": ["Celcius", "Farhenhit"]
+  "Length": ["meter", "centimeter", "kilometer"], "Mass": ["kg", "gram"],
+  "Temperature": ["celcius", "farhenhit"]
 }];
 
 class Selectordiv extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
       unitState: '',
-      unitGroup: []
+      unitGroupSelected: [],
     }
+  }
+
+  componentWillMount() {
+    const key = Object.keys(unitGroup[0])
+    // console.log("key--> ", unitGroup[0][key[0]])
+    var arr = []
+    for (var i = 0; i < unitGroup[0][key[0]].length; i++) {
+      var val = unitGroup[0][key[0]][i]
+      // console.log(val)
+      arr.push(val)
+    }
+
+    this.setState({ unitGroupSelected: arr })
   }
 
   firstSelectorChange = (event) => {
@@ -21,13 +35,17 @@ class Selectordiv extends Component {
     unitGroup.map((value, index) => {
       return (
         this.setState({
-          unitGroup: value[event.target.value]
+          unitGroupSelected: value[event.target.value]
         }))
     });
   };
 
   render() {
     const key = Object.keys(unitGroup[0])
+    // console.log("key--> ", unitGroup[0][key[0]][0])
+    // var x = unitGroup[0][key[0]][0]
+
+    // arr.push(x)
     const listItems = key.map((value, index) => {
       return (
         <option key={index}>{value}</option>
@@ -36,19 +54,15 @@ class Selectordiv extends Component {
     return (
       <div>
         <select id="units" className="selectors" onChange={this.firstSelectorChange} value={this.state.unitState}>
-        <option> select unit</option>
+          {/* <option ></option> */}
           {
             listItems
           })
         }
-        {/* <option value={10}>Length</option>
-        <option value={20}>Temperature</option>
-        <option value={30}>Mass</option>
-        <option value={20}>Volume</option> */}
         </select>
-        <Textfield value={this.state.unitGroup}/>
+        <Textfield value={this.state.unitGroupSelected} />
       </div>
-      )
-    }
+    )
   }
+}
 export default Selectordiv;
