@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import Textfield from './Textfield'
 
 const unitGroup = [{
-  "Length": ["meter", "centimeter", "kilometer"], "Mass": ["kg", "gram"],
+  "Length": ["meter", "centimeter", "kilometer"],
+  "Weight": ["kg", "gram"],
   "Temperature": ["celcius", "farhenhit"]
 }];
 
