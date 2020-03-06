@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
+import configuration from '../configuration/configuration'
 
 class Textfield extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            textfield1: '0',
-            textfield2: '0',
-            selector2:'meter',
-            selector3:'meter'
+            textfield1: 0,
+            textfield2: 0,
+            selector2: 'FEET',
+            selector3: 'FEET'
         }
     }
     textfieldVal1 = (event) => {
@@ -18,23 +19,25 @@ class Textfield extends Component {
         this.setState({ textfield2: event.target.value })
     }
 
-    secondSelector=(event)=>{
-        this.setState({selector2:event.target.value})
+    secondSelector = (event) => {
+        this.setState({ selector2: event.target.value })
     }
 
-    thirdSelector=(event)=>{
-        this.setState({selector3:event.target.value})
+    thirdSelector = (event) => {
+        this.setState({ selector3: event.target.value })
     }
 
-    buttonClick =()=>{
-        console.log("textfield1--> ", this.state.textfield1)
-        console.log("textfield2--> ", this.state.textfield2)
-        console.log("selector2--->",this.state.selector2)
-        console.log("selector3--->",this.state.selector3)
+    buttonClick = (event) => {
+        configuration(this.state.textfield1, this.state.selector2, this.state.selector3).then((res) => {
+            console.log("response---->", res.data);
 
+            this.setState({
+                textfield2: res.data
+
+            })
+        })
     }
 
-    
     render() {
         // console.log("in props--->",this.props.value)
         const unitType = this.props.value.map((value, index) => {
@@ -46,9 +49,9 @@ class Textfield extends Component {
             <div>
                 <form>
                     <div className="textdivstyle">
-                        <input className="textfield1" pattern="[0-9]" type="text" required defaultValue="0" onChange={this.textfieldVal1}></input>
+                        <input className="textfield1" pattern="[0-9]" type="text" required defaultValue={0} onChange={this.textfieldVal1} value={this.state.textfield1}></input>
                         <label style={{ fontSize: "200%" }}><b>&#x3d;</b></label>
-                        <input className="textfield1" pattern="[0-9]" type="text" required defaultValue="0" onChange={this.textfieldVal2}></input>
+                        <input className="textfield1" pattern="[0-9]" type="text" defaultValue={0} onChange={this.textfieldVal2} value={this.state.textfield2}></input>
                     </div>
                     <div>
 

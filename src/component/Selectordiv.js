@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import Textfield from './Textfield'
 
 const unitGroup = [{
-  "Length": ["meter", "centimeter", "kilometer"],
-  "Weight": ["kg", "gram"],
-  "Temperature": ["celcius", "farhenhit"]
+  "Length": ["FEET", "INCH", "YARD","CM"],
+  "Weight": ["LITRES", "GALLON","ML","TONNE","KILOGRAM","GRAM"],
+  "Temperature": ["FARHANHIT", "CELCIUS"]
 }];
 
 class Selectordiv extends Component {
-
   constructor(props) {
     super(props)
     this.state = {
@@ -19,11 +18,9 @@ class Selectordiv extends Component {
 
   componentWillMount() {
     const key = Object.keys(unitGroup[0])
-    // console.log("key--> ", unitGroup[0][key[0]])
     var arr = []
     for (var i = 0; i < unitGroup[0][key[0]].length; i++) {
       var val = unitGroup[0][key[0]][i]
-      // console.log(val)
       arr.push(val)
     }
 
@@ -32,7 +29,6 @@ class Selectordiv extends Component {
 
   firstSelectorChange = (event) => {
     this.setState({ unitState: event.target.value });
-    // console.log("valuesss-->", event.target.value)
     unitGroup.map((value, index) => {
       return (
         this.setState({
@@ -55,9 +51,8 @@ class Selectordiv extends Component {
     return (
       <div>
         <select id="units" className="selectors" onChange={this.firstSelectorChange} value={this.state.unitState}>
-          {/* <option ></option> */}
           {
-            listItems
+           [ listItems]
           })
         }
         </select>
