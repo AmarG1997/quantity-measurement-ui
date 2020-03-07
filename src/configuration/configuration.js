@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 function configuration(obj1,obj2,obj3){
+    console.log("move-->",obj1,obj2,obj3);
+    
     return axios({
         method:'post',
         url:'http://localhost:8080//unitConverter',

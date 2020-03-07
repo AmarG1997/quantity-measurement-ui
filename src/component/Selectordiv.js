@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import Textfield from './Textfield'
 
 const unitGroup = [{
-  "Length": ["FEET", "INCH", "YARD","CM"],
-  "Weight": ["LITRES", "GALLON","ML","TONNE","KILOGRAM","GRAM"],
+  "Length": ["FEET", "INCH", "YARD", "CM"],
+  "Weight": ["LITRES", "GALLON", "ML", "TONNE", "KILOGRAM", "GRAM"],
   "Temperature": ["FARHANHIT", "CELCIUS"]
 }];
 
@@ -14,6 +14,8 @@ class Selectordiv extends Component {
       unitState: '',
       unitGroupSelected: [],
     }
+    console.log("in constructor",props)
+    this.Textfield = React.createRef()
   }
 
   componentWillMount() {
@@ -22,8 +24,7 @@ class Selectordiv extends Component {
     for (var i = 0; i < unitGroup[0][key[0]].length; i++) {
       var val = unitGroup[0][key[0]][i]
       arr.push(val)
-    }
-
+    }    
     this.setState({ unitGroupSelected: arr })
   }
 
@@ -35,14 +36,11 @@ class Selectordiv extends Component {
           unitGroupSelected: value[event.target.value]
         }))
     });
+    this.Textfield.current.handleUpdateUnit(unitGroup[0][event.target.value]);
   };
 
   render() {
     const key = Object.keys(unitGroup[0])
-    // console.log("key--> ", unitGroup[0][key[0]][0])
-    // var x = unitGroup[0][key[0]][0]
-
-    // arr.push(x)
     const listItems = key.map((value, index) => {
       return (
         <option key={index}>{value}</option>
@@ -52,11 +50,11 @@ class Selectordiv extends Component {
       <div>
         <select id="units" className="selectors" onChange={this.firstSelectorChange} value={this.state.unitState}>
           {
-           [ listItems]
+            [listItems]
           })
         }
         </select>
-        <Textfield value={this.state.unitGroupSelected} />
+        <Textfield ref={this.Textfield} value={this.state.unitGroupSelected} />
       </div>
     )
   }

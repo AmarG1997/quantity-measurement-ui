@@ -10,7 +10,18 @@ class Textfield extends Component {
             selector2: 'FEET',
             selector3: 'FEET'
         }
+        
     }
+
+    handleUpdateUnit(value){
+        console.log("selected array-->",value[0]);
+        this.setState({
+            selector2:value[0],
+            selector3:value[0]
+        })
+        
+    }
+    
     textfieldVal1 = (event) => {
         this.setState({ textfield1: event.target.value })
     }
@@ -30,16 +41,14 @@ class Textfield extends Component {
     buttonClick = (event) => {
         configuration(this.state.textfield1, this.state.selector2, this.state.selector3).then((res) => {
             console.log("response---->", res.data);
-
             this.setState({
                 textfield2: res.data
-
             })
         })
     }
 
     render() {
-        // console.log("in props--->",this.props.value)
+        console.log("in props--->",this.props.value[0])
         const unitType = this.props.value.map((value, index) => {
             return (
                 <option key={index}>{value}</option>
@@ -55,7 +64,7 @@ class Textfield extends Component {
                     </div>
                     <div>
 
-                        <select className="selectors2" onChange={this.secondSelector}>
+                        <select className="selectors2"  onChange={this.secondSelector}>
                             {unitType}
                         </select>
                         <select className="selectors3" onChange={this.thirdSelector}>
