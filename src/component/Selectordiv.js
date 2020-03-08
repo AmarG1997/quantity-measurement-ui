@@ -1,11 +1,7 @@
 import React, { Component } from 'react'
 import Textfield from './Textfield'
-
-const unitGroup = [{
-  "Length": ["FEET", "INCH", "YARD", "CM"],
-  "Weight": ["LITRES", "GALLON", "ML", "TONNE", "KILOGRAM", "GRAM"],
-  "Temperature": ["FARHANHIT", "CELCIUS"]
-}];
+import {getUnit} from '../configuration/configuration'
+import {getEnum} from '../configuration/configuration'
 
 class Selectordiv extends Component {
   constructor(props) {
@@ -13,44 +9,46 @@ class Selectordiv extends Component {
     this.state = {
       unitState: '',
       unitGroupSelected: [],
+      unitList12:[]
     }
-    console.log("in constructor",props)
     this.Textfield = React.createRef()
   }
 
   componentWillMount() {
-    const key = Object.keys(unitGroup[0])
-    var arr = []
-    for (var i = 0; i < unitGroup[0][key[0]].length; i++) {
-      var val = unitGroup[0][key[0]][i]
-      arr.push(val)
-    }    
-    this.setState({ unitGroupSelected: arr })
+     getUnit().then((res)=>{
+      // console.log("in getUnit response is--->",res.data)
+      this.setState({
+        unitList12:res.data
+      })
+      getEnum(this.state.unitList12[0]).then((response)=>{
+        this.setState({
+          unitGroupSelected:response.data
+        })
+      }) 
+    })
   }
 
   firstSelectorChange = (event) => {
+    let fsvalueevent=event.target.value;
     this.setState({ unitState: event.target.value });
-    unitGroup.map((value, index) => {
-      return (
-        this.setState({
-          unitGroupSelected: value[event.target.value]
-        }))
-    });
-    this.Textfield.current.handleUpdateUnit(unitGroup[0][event.target.value]);
+    getEnum(fsvalueevent).then((responseOfgetEnum)=>{
+      this.setState({
+        unitGroupSelected:responseOfgetEnum.data
+      })
+    })     
   };
 
   render() {
-    const key = Object.keys(unitGroup[0])
-    const listItems = key.map((value, index) => {
-      return (
-        <option key={index}>{value}</option>
-      )
-    })
+   let unitType=this.state.unitList12.map((value,index)=>{
+     return(
+     <option key={index}>{value}</option>
+     )
+   })
     return (
       <div>
         <select id="units" className="selectors" onChange={this.firstSelectorChange} value={this.state.unitState}>
           {
-            [listItems]
+            [unitType]           
           })
         }
         </select>

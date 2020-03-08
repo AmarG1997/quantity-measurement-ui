@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-function configuration(obj1,obj2,obj3){
-    console.log("move-->",obj1,obj2,obj3);
-    
+export function configuration(obj1,obj2,obj3){
+    console.log("move-->",obj1,obj2,obj3); 
     return axios({
         method:'post',
         url:'http://localhost:8080//unitConverter',
@@ -14,4 +13,15 @@ function configuration(obj1,obj2,obj3){
     })
 }
 
-export default configuration;
+ export function getUnit(){
+     console.log("in getUnit")
+    return axios.get("http://localhost:8080/getUnit")
+}
+
+export function getEnum(unitType){
+    console.log("in getEnum functio",unitType);    
+    var unit=unitType;
+    var url1='http://localhost:8080/'
+    var finalUrl=(url1.concat(unit))  
+    return axios.get(finalUrl)
+}

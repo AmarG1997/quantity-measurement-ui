@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import configuration from '../configuration/configuration'
+import {configuration} from '../configuration/configuration'
 
 class Textfield extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class Textfield extends Component {
     }
 
     handleUpdateUnit(value){
-        console.log("selected array-->",value[0]);
+        // console.log("selected array-->",value[0]);
         this.setState({
             selector2:value[0],
             selector3:value[0]
@@ -40,7 +40,6 @@ class Textfield extends Component {
 
     buttonClick = (event) => {
         configuration(this.state.textfield1, this.state.selector2, this.state.selector3).then((res) => {
-            console.log("response---->", res.data);
             this.setState({
                 textfield2: res.data
             })
@@ -48,7 +47,7 @@ class Textfield extends Component {
     }
 
     render() {
-        console.log("in props--->",this.props.value[0])
+        console.log("in props--->",this.props.value)
         const unitType = this.props.value.map((value, index) => {
             return (
                 <option key={index}>{value}</option>
