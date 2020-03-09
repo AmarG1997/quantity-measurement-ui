@@ -14,10 +14,10 @@ class Textfield extends Component {
     }
 
     handleUpdateUnit(value){
-        // console.log("selected array-->",value[0]);
+        console.log("selected array in handle Update unit-->",value);
         this.setState({
-            selector2:value[0],
-            selector3:value[0]
+            selector2:value,
+            selector3:value
         })
         
     }
@@ -57,9 +57,9 @@ class Textfield extends Component {
             <div>
                 <form>
                     <div className="textdivstyle">
-                        <input className="textfield1" pattern="[0-9]" type="text" required defaultValue={0} onChange={this.textfieldVal1} value={this.state.textfield1}></input>
+                        <input className="textfield1" pattern="[0-9]" type="number" required defaultValue={0} onChange={this.textfieldVal1} value={this.state.textfield1}></input>
                         <label style={{ fontSize: "200%" }}><b>&#x3d;</b></label>
-                        <input className="textfield1" pattern="[0-9]" type="text" defaultValue={0} onChange={this.textfieldVal2} value={this.state.textfield2}></input>
+                        <input className="textfield1" pattern="[0-9]" type="number" defaultValue={0} onChange={this.textfieldVal2} value={this.state.textfield2}></input>
                     </div>
                     <div>
 

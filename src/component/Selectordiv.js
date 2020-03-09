@@ -28,14 +28,15 @@ class Selectordiv extends Component {
     })
   }
 
-  firstSelectorChange = (event) => {
+  firstSelectorChange = async (event) => {
     let fsvalueevent=event.target.value;
     this.setState({ unitState: event.target.value });
-    getEnum(fsvalueevent).then((responseOfgetEnum)=>{
+    await getEnum(fsvalueevent).then((responseOfgetEnum)=>{
       this.setState({
         unitGroupSelected:responseOfgetEnum.data
       })
-    })     
+    })  
+    this.Textfield.current.handleUpdateUnit(this.state.unitGroupSelected[0]);
   };
 
   render() {
